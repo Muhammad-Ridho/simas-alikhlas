@@ -4,10 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @yield('titleApp')
+    @yield('titleApp')   
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
@@ -26,8 +27,6 @@
     <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css') }}">
-
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -47,14 +46,15 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link" >
-                <img src="{{asset('dist/img/SimasLogo.png') }}" alt="Simas Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <a href="index3.html" class="brand-link">
+                <img src="{{asset('dist/img/SimasLogo.png') }}" alt="Simas Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
                 <span class="brand-text font-weight-light">SIMAS AL-IKHLAS</span>
             </a>
 
             <!-- Sidebar -->
             @section('sidebar')
-            @include('layouts.admin.sidebar')
+            @include('layouts.pengelola_cabang.sidebar')
             @show
             <!-- /.sidebar -->
         </aside>
@@ -87,7 +87,7 @@
     <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button)
+    $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
