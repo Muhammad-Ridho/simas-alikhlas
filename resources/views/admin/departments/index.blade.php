@@ -1,16 +1,16 @@
-@extends('admin.users.layout')
+@extends('admin.departments.layout')
 
-@section('users.content')
+@section('department.content')
 <div class="container">
     <div class="card">
         <div class="card-header d-flex flex-column flex-md-row align-items-md-center justify-content-between">
             <ol class="breadcrumb m-0 p-0 flex-grow-1 mb-2 mb-md-0">
-                <li class="breadcrumb-item"><a href="{{ implode('/', ['','users']) }}"> Users</a></li>
+                <li class="breadcrumb-item"><a href="{{ implode('/', ['','departments']) }}"> Department</a></li>
             </ol>
 
-            <form action="{{ route('users.index', []) }}" method="GET" class="m-0 p-0">
+            <form action="{{ route('departments.index', []) }}" method="GET" class="m-0 p-0">
                 <div class="input-group">
-                    <input type="text" class="form-control form-control-sm me-2" name="search" placeholder="Search Users..." value="{{ request()->search }}">
+                    <input type="text" class="form-control form-control-sm me-2" name="search" placeholder="Search Department..." value="{{ request()->search }}">
                     <span class="input-group-btn">
                         <button class="btn btn-info btn-sm" type="submit"><i class="fa fa-search"></i> @lang('Go!')</button>
                     </span>
@@ -23,29 +23,26 @@
                     <tr role="row">
                         <th role='columnheader'>No</th>
                         <th role='columnheader'>Name</th>
-                        <th role='columnheader'>Email</th>
-                        <th role='columnheader'>Role</th>
                         <th scope="col" data-label="Actions">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $no = 0; ?>
-                    @foreach($users as $user)
+                    @foreach($departments as $department)
                     <?php $no++; ?>
+
                     <tr>
                         <td data-label="Name">{{ $no }}</td>
-                        <td data-label="Name">{{ $user->name ?: "(blank)" }}</td>
-                        <td data-label="Email">{{ $user->email ?: "(blank)" }}</td>
-                        <td data-label="Role">{{ $user->role }}</td>
+                        <td data-label="Name">{{ $department->name ?: "(blank)" }}</td>
 
                         <td data-label="Actions:" class="text-nowrap">
-                            <a href="{{route('users.show', compact('user'))}}" type="button" class="btn btn-primary btn-sm me-1">@lang('Show')</a>
+                            <a href="{{route('departments.show', compact('department'))}}" type="button" class="btn btn-primary btn-sm me-1">@lang('Show')</a>
                             <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-cog"></i></button>
+                                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-cog"></i></button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{route('users.edit', compact('user'))}}">@lang('Edit')</a></li>
+                                    <li><a class="dropdown-item" href="{{route('departments.edit', compact('department'))}}">@lang('Edit')</a></li>
                                     <li>
-                                        <form action="{{route('users.destroy', compact('user'))}}" method="POST" style="display: inline;" class="m-0 p-0">
+                                        <form action="{{route('departments.destroy', compact('department'))}}" method="POST" style="display: inline;" class="m-0 p-0">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item">@lang('Delete')</button>
@@ -60,10 +57,10 @@
                 </tbody>
             </table>
 
-            {{ $users->withQueryString()->links() }}
+            {{ $departments->withQueryString()->links() }}
         </div>
         <div class="text-center my-2">
-            <a href="{{ route('users.create', []) }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('Create new User')</a>
+            <a href="{{ route('departments.create', []) }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('Create new Department')</a>
         </div>
     </div>
 </div>

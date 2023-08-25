@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -29,7 +30,8 @@ class HomeController extends Controller
 
     public function adminHome()
     {
-        return view('admin.index');
+        $department = Department::all();
+        return view('admin.index',compact('department'));
     }
 
     public function kabagSarprasHome()
