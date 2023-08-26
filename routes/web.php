@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LokasiController;
+use App\Http\Controllers\KategoriController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +46,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('departments', DepartmentController::class);
     Route::resource('lokasis', LokasiController::class);
+    Route::resource('kategoris', KategoriController::class);
 });
 
  
