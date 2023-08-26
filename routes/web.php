@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\JnspengadaanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +48,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('departments', DepartmentController::class);
     Route::resource('lokasis', LokasiController::class);
     Route::resource('kategoris', KategoriController::class);
+    Route::resource('jnspengadaans', JnspengadaanController::class);
 });
 
  
