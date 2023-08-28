@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asset;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -31,7 +32,8 @@ class HomeController extends Controller
     public function adminHome()
     {
         $department = Department::all();
-        return view('admin.index',compact('department'));
+        $asset = Asset::all();
+        return view('admin.index',compact('department','asset'));
     }
 
     public function kabagSarprasHome()

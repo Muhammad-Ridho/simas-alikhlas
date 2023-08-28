@@ -31,7 +31,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>000</h3>
+                        <h3>{{ $asset->count() }}</h3>
 
                         <p>Total Aset</p>
                     </div>

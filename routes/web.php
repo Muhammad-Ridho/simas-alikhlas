@@ -7,6 +7,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\JnspengadaanController;
+use App\Http\Controllers\AssetController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,6 +50,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('lokasis', LokasiController::class);
     Route::resource('kategoris', KategoriController::class);
     Route::resource('jnspengadaans', JnspengadaanController::class);
+    Route::resource('assets', AssetController::class);
 });
 
  
