@@ -21,7 +21,7 @@ use App\Http\Controllers\ReportAssetController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -63,7 +63,8 @@ All Kabag Sarpras Routes List
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:kabagSarpras'])->group(function () {
   
-    Route::get('/kabag-sarpras/home', [HomeController::class, 'kabangSarprasHome'])->name('kabagSarpras.home');
+    Route::get('/kabag/home', [HomeController::class, 'kabagSarprasHome'])->name('kabag.home');
+    // Route::resource('kabagSarpras', HomeController::class, 'kabagSarprasHome');
 });
 
 
@@ -74,5 +75,5 @@ All Pengelola Cabang Routes List
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:pengelolaCabang'])->group(function () {
   
-    Route::get('/pengelola-cabang/home', [HomeController::class, 'pengelolaCabangHome'])->name('pengelolaCabang.home');
+    Route::get('/pengelola/home', [HomeController::class, 'pengelolaCabangHome'])->name('pengelola.home');
 });

@@ -52,9 +52,9 @@ class LoginController extends Controller
             if (auth()->user()->role == 'admin') {
                 return redirect()->route('admin.home');
             }else if (auth()->user()->role == 'kabagSarpras') {
-                return redirect()->route('kabagSarpras.home');
-            } else if (auth()->user()->role == 'pengelolacabang') {
-                return redirect()->route('pengelolaCabang.home');
+                return redirect()->route('kabag.home');
+            } else if (auth()->user()->role == 'pengelolaCabang') {
+                return redirect()->route('pengelola.home');
             } else {
                 return redirect()->route('home');
             }

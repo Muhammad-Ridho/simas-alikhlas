@@ -6,24 +6,27 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 
-class UserController extends Controller {
+class UserController extends Controller
+{
 
-    public function __construct() {
-		$this->authorizeResource(User::class, 'user');
-	}
+    public function __construct()
+    {
+        $this->authorizeResource(User::class, 'user');
+    }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, ) {
+    public function index(Request $request,)
+    {
 
         $users = User::query();
 
-        if(!empty($request->search)) {
-			$users->where('name', 'like', '%' . $request->search . '%');
-		}
+        if (!empty($request->search)) {
+            $users->where('name', 'like', '%' . $request->search . '%');
+        }
 
         $users = $users->paginate(10);
 
@@ -35,7 +38,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
 
         return view('admin.users.create', []);
     }
@@ -47,7 +51,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, ) {
+    public function store(Request $request,)
+    {
 
         $request->validate(["name" => "required", "email" => "required|unique:users,email", "password" => "required"]);
 
@@ -55,11 +60,11 @@ class UserController extends Controller {
 
             $user = new User();
             $user->name = $request->name;
-		$user->email = $request->email;
-		$user->email_verified_at = $request->email_verified_at;
-		$user->password = $request->password;
-		$user->role = !!$request->role;
-		$user->remember_token = $request->remember_token;
+            $user->email = $request->email;
+            $user->email_verified_at = $request->email_verified_at;
+            $user->password = $request->password;
+            $user->role = !!$request->role;
+            $user->remember_token = $request->remember_token;
             $user->save();
 
             return redirect()->route('users.index', [])->with('success', __('User created successfully.'));
@@ -75,7 +80,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user,) {
+    public function show(User $user,)
+    {
 
         return view('admin.users.show', compact('user'));
     }
@@ -87,7 +93,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user,) {
+    public function edit(User $user,)
+    {
 
         return view('admin.users.edit', compact('user'));
     }
@@ -99,17 +106,18 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user,) {
+    public function update(Request $request, User $user,)
+    {
 
         $request->validate(["name" => "required", "email" => "required|unique:users,email,$user->id", "password" => "required"]);
 
         try {
             $user->name = $request->name;
-		$user->email = $request->email;
-		$user->email_verified_at = $request->email_verified_at;
-		$user->password = $request->password;
-		$user->role = !!$request->role;
-		$user->remember_token = $request->remember_token;
+            $user->email = $request->email;
+            $user->email_verified_at = $request->email_verified_at;
+            $user->password = $request->password;
+            $user->role = !!$request->role;
+            $user->remember_token = $request->remember_token;
             $user->save();
 
             return redirect()->route('users.index', [])->with('success', __('User edited successfully.'));
@@ -125,7 +133,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user,) {
+    public function destroy(User $user,)
+    {
 
         try {
             $user->delete();
@@ -135,6 +144,4 @@ class UserController extends Controller {
             return redirect()->route('users.index', [])->with('error', 'Cannot delete User: ' . $e->getMessage());
         }
     }
-
-    
 }

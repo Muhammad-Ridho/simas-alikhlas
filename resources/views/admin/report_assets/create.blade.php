@@ -57,6 +57,7 @@
                         @if($errors->has('umur_aset'))
                         <div class='error small text-danger'>{{$errors->first('umur_aset')}}</div>
                         @endif
+                        <p id="ket_umur_aset">keterangan Umur Aset</p>
                     </div>
                     <div class="mb-3">
                         <label for="penyusutan_per_tahun" class="form-label">Penyusutan Per Tahun:</label>
@@ -91,40 +92,78 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const assetDropdown = document.getElementById("asset_id");
-        const ageInput = document.getElementById("umur_aset");
+        const umurAsetInput = document.getElementById("umur_aset");
+        const reportDateInput = document.getElementById("tanggal_laporan");
+        const ketUmurAsetElement = document.getElementById("ket_umur_aset");
         const acquisitionInput = document.getElementById("nilai_perolehan");
+        const penyusutanPertahunInput = document.getElementById("penyusutan_per_tahun");
 
         // Listen for change event on the dropdown
         assetDropdown.addEventListener("change", function() {
             // Get the selected option
             const selectedOption = assetDropdown.options[assetDropdown.selectedIndex];
 
+            // ============mendapatkan data nilai perolehan============
             // Extract data attributes from the selected option
-            // const age = selectedOption.getAttribute("data-age");
             const acquisitionValue = selectedOption.getAttribute("data-acquisition");
-
             // Set values to the input fields
-            // ageInput.value = age;
             acquisitionInput.value = acquisitionValue;
+
+            // ============mendapatkan umur aset============
+            // Extract data attributes from the selected option
+            const acquisitionDate = new Date(selectedOption.getAttribute("tgl-perolehan"));
+            // Calculate the age of the asset in years, months, and days
+            const ageInYears = (new Date() - acquisitionDate) / (1000 * 60 * 60 * 24 * 365);
+            const ageInMonths = ageInYears * 12;
+            const ageInDays = ageInYears * 365;
+
+            // Set integer value for age in years on the umur aset input
+            umurAsetInput.value = Math.floor(ageInYears);
+            // Set values to the Report Date input
+            reportDateInput.value = acquisitionDate.toISOString().slice(0, 10); // Format date as yyyy-mm-dd
+
+            // sett text p id ="ket_umur_aset"
+            const years = ageInYears.toFixed(2);
+            const months = Math.floor(years * 12);
+            const days = Math.floor(years * 365);
+
+            ketUmurAsetElement.textContent = `Umur aset: ${years} tahun setara dengan ${months} bulan atau ${days} hari.`;
         });
     });
+    
+
+    // sett tanggal laporan
+    document.addEventListener("DOMContentLoaded", function() {
+        const reportDateInput = document.getElementById("tanggal_laporan");
+        const today = new Date();
+        const formattedDate = formatDate(today);
+
+        reportDateInput.value = formattedDate;
+    });
+
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    }
 </script>
 
 <!-- format input currency IDR -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const acquisitionInput = document.getElementById("nilai_perolehan");
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     const acquisitionInput = document.getElementById("nilai_perolehan");
 
-    acquisitionInput.addEventListener("input", function () {
-        const value = parseFloat(acquisitionInput.value);
-        const formattedValue = formatCurrency(value);
+    //     acquisitionInput.addEventListener("input", function() {
+    //         const value = parseFloat(acquisitionInput.value);
+    //         const formattedValue = formatCurrency(value);
 
-        acquisitionInput.value = formattedValue;
-    });
+    //         acquisitionInput.value = formattedValue;
+    //     });
 
-    function formatCurrency(amount) {
-        return "Rp " + amount.toLocaleString("id-ID");
-    }
-});
+    //     function formatCurrency(amount) {
+    //         return "Rp " + amount.toLocaleString("id-ID");
+    //     }
+    // });
 </script>
 @endsection
