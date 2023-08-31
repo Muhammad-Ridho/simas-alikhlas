@@ -53,7 +53,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('assets.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>Asset Management</p>
                 </a>

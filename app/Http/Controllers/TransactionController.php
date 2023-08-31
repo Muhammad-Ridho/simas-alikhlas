@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -32,7 +33,12 @@ class TransactionController extends Controller
 
         $transactions = $transactions->paginate(10);
 
-        return view('admin.transactions.index', compact('transactions'));
+        
+        if (Auth::user()->role == 'admin') {
+            return view('admin.transactions.index', compact('transactions'));
+        }else{
+            return view('pimpinan.transactions.index', compact('transactions'));
+        }
     }
 
     /**

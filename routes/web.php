@@ -23,7 +23,7 @@ use App\Http\Controllers\TransactionController;
 */
 
 Route::get('/', function () {
-    return route('login');
+    return view('welcome');
 });
 
 Auth::routes();
@@ -38,6 +38,9 @@ All Normal Users Routes List
 Route::middleware(['auth', 'user-access:pimpinan'])->group(function () {
   
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/assets-view', [AssetController::class, 'index']);
+    Route::get('/transactions-view', [TransactionController::class, 'index']);
+    Route::get('/reports-view', [ReportController::class, 'index']);
 });
   
 /*------------------------------------------
@@ -45,7 +48,7 @@ Route::middleware(['auth', 'user-access:pimpinan'])->group(function () {
 All Admin Routes List
 --------------------------------------------
 --------------------------------------------*/
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
+Route::middleware(['auth', 'user-access:admin' ])->group(function () {
   
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
     Route::resource('users', UserController::class);
@@ -67,7 +70,7 @@ All Kabag Sarpras Routes List
 Route::middleware(['auth', 'user-access:kabagSarpras'])->group(function () {
   
     Route::get('/kabag/home', [HomeController::class, 'kabagSarprasHome'])->name('kabag.home');
-    // Route::resource('kabagSarpras', HomeController::class, 'kabagSarprasHome');
+    
 });
 
 

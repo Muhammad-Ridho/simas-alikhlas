@@ -46,7 +46,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="umur_aset" class="form-label">Umur Aset:</label>
-                        <input type="number" name="umur_aset" id="umur_aset" class="form-control" value="{{@old('umur_aset')}}" required readonly/>
+                        <input type="number" name="umur_aset" id="umur_aset" class="form-control" value="{{@old('umur_aset')}}" required/>
                         @if($errors->has('umur_aset'))
                         <div class='error small text-danger'>{{$errors->first('umur_aset')}}</div>
                         @endif

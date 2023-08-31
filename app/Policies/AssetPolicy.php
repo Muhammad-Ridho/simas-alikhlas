@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Asset;
 
-class AssetPolicy {
+class AssetPolicy
+{
     use HandlesAuthorization;
 
     /**
@@ -18,7 +19,8 @@ class AssetPolicy {
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user) {
+    public function viewAny(User $user)
+    {
         return true;
     }
 
@@ -29,8 +31,10 @@ class AssetPolicy {
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Asset $asset) {
+    public function view(User $user, Asset $asset)
+    {
         return true;
+        // return $user->hasRole('admin') || $user->hasRole('manager');
     }
 
     /**
@@ -40,7 +44,8 @@ class AssetPolicy {
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user) {
+    public function create(User $user)
+    {
         return true;
     }
 
@@ -51,7 +56,8 @@ class AssetPolicy {
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Asset $asset) {
+    public function update(User $user, Asset $asset)
+    {
         return true;
     }
 
@@ -62,7 +68,8 @@ class AssetPolicy {
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Asset $asset) {
+    public function delete(User $user, Asset $asset)
+    {
         return true;
     }
 
@@ -73,7 +80,8 @@ class AssetPolicy {
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Asset $asset) {
+    public function restore(User $user, Asset $asset)
+    {
         return true;
     }
 
@@ -84,7 +92,8 @@ class AssetPolicy {
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Asset $asset) {
+    public function forceDelete(User $user, Asset $asset)
+    {
         return true;
     }
 }

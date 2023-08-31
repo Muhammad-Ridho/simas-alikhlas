@@ -1,13 +1,9 @@
-@extends('admin.assets.layout')
+@extends('pimpinan.assets.layout')
 
 @section('assets.content')
 <div class="container">
     <div class="card">
         <div class="card-header d-flex flex-column flex-md-row align-items-md-center justify-content-between">
-            <div class="text-center my-2 m-2">
-                <a href="{{ route('assets.create', []) }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('Tambah Data')</a>
-            </div>
-
             <ol class="breadcrumb m-0 p-0 flex-grow-1 mb-2 mb-md-0">
                 <li class="breadcrumb-item"><a href="{{ route('assets.index', compact([])) }}"> Assets</a></li>
             </ol>
@@ -27,13 +23,16 @@
                     <tr role="row">
                         <th role='columnheader'>No</th>
                         <th role='columnheader'>Name</th>
+                        <th role='columnheader'>Image</th>
                         <th role='columnheader'>Kategori</th>
+                        <th role='columnheader'>Jenis Pengadaan</th>
                         <th role='columnheader'>Tgl Perolehan</th>
                         <th role='columnheader'>Nilai Perolehan</th>
+                        <th role='columnheader'>Department</th>
                         <th role='columnheader'>Lokasi</th>
                         <th role='columnheader'>Jenis Aset</th>
-                        <th role='columnheader'>Image</th>
-                        <th scope="col" data-label="Actions">Actions</th>
+                        <th role='columnheader'>Deskripsi</th>
+                        <!-- <th scope="col" data-label="Actions">Actions</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -43,11 +42,6 @@
                     <tr>
                         <td data-label="Name">{{ $no }}</td>
                         <td data-label="Name">{{ $asset->name ?: "(blank)" }}</td>
-                        <td data-label="Kategori">{{ optional($asset->category)->name ?: "N/A" }}</td>
-                        <td data-label="Tgl Perolehan">{{ $asset->tgl_perolehan ? $asset->tgl_perolehan->format('Y-m-d') : '' }}</td>
-                        <td data-label="Nilai Perolehan">Rp. {{ number_format($asset->nilai_perolehan, 0, ',', '.') }}</td>
-                        <td data-label="Lokasi">{{ optional($asset->location)->name ?: "N/A" }}</td>
-                        <td data-label="Is Fixed Asset">{{ $asset->is_fixed_asset ? "Tetap" : "Tidak Tetap" }}</td>
                         <td data-label="Asset Image Path">
                             @if($asset->asset_image_path)
                             <img src="{{ asset('storage/asset_image_path/' . $asset->asset_image_path) }}" alt="{{ $asset->name }}" style="max-width: 100px; max-height: 100px;">
@@ -55,24 +49,14 @@
                             <p>No Image Available</p>
                             @endif
                         </td>
-
-                        <td data-label="Actions:" class="text-nowrap">
-                            <a href="{{route('assets.show', compact('asset'))}}" type="button" class="btn btn-primary btn-sm me-1">@lang('Show')</a>
-                            <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-cog"></i></button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{route('assets.edit', compact('asset'))}}">@lang('Edit')</a></li>
-                                    <li>
-                                        <form action="{{route('assets.destroy', compact('asset'))}}" method="POST" style="display: inline;" class="m-0 p-0">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="dropdown-item">@lang('Delete')</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </td>
+                        <td data-label="Kategori">{{ optional($asset->category)->name ?: "N/A" }}</td>
+                        <td data-label="Jns Pengadaan">{{ optional($asset->jnsPengadaan)->name ?: "N/A" }}</td>
+                        <td data-label="Tgl Perolehan">{{ $asset->tgl_perolehan ? $asset->tgl_perolehan->format('Y-m-d') : '' }}</td>
+                        <td data-label="Nilai Perolehan">Rp. {{ number_format($asset->nilai_perolehan, 0, ',', '.') }}</td>
+                        <td data-label="Department">{{ optional($asset->department)->name ?: "N/A" }}</td>
+                        <td data-label="Lokasi">{{ optional($asset->location)->name ?: "N/A" }}</td>
+                        <td data-label="Is Fixed Asset">{{ $asset->is_fixed_asset ? "Aktif" : "Non-Aktif" }}</td>
+                        <td data-label="Nilai Perolehan">{{ $asset->deskripsi ?: "(blank)" }}</td>
                     </tr>
                     @endforeach
                 </tbody>

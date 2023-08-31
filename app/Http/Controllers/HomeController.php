@@ -26,7 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pimpinan.index');
+        $department = Department::all();
+        $asset = Asset::all();
+        return view('pimpinan.index', compact('department','asset'));
     }
 
     public function adminHome()

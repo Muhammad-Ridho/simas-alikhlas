@@ -15,7 +15,19 @@ class Asset extends Model
   use HasFactory;
 
   protected $table = 'assets';
-  protected $fillable = ["name", "deskripsi", "kategori_id", "jns_pengadaan_id", "tgl_perolehan", "nilai_perolehan", "lokasi_id", "assigned_to_user_id", "department_id", "is_fixed_asset", "asset_image_path"];
+  protected $fillable = [
+    "name", 
+    "deskripsi", 
+    "kategori_id", 
+    "jns_pengadaan_id", 
+    "tgl_perolehan", 
+    "nilai_perolehan", 
+    "lokasi_id", 
+    "assigned_to_user_id", 
+    "department_id", 
+    "is_fixed_asset", 
+    "asset_image_path
+    "];
 
   protected $casts = [
     'tgl_perolehan' => 'datetime',

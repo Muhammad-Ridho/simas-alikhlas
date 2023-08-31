@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Report;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -32,7 +33,12 @@ class ReportController extends Controller
 
         $reports = $reports->paginate(10);
 
-        return view('admin.reports.index', compact('reports'));
+        if (Auth::user()->role == 'admin') {
+            return view('admin.reports.index', compact('reports'));
+        } else {
+            return view('pimpinan.reports.index', compact('reports'));
+        }
+        
     }
 
     /**

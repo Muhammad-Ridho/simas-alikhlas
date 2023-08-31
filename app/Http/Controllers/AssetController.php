@@ -11,6 +11,7 @@ use App\Models\Jnspengadaan;
 use App\Models\Kategori;
 use App\Models\Lokasi;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AssetController extends Controller
 {
@@ -25,7 +26,7 @@ class AssetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,)
+    public function index(Request $request)
     {
 
         $assets = Asset::query();
@@ -40,7 +41,13 @@ class AssetController extends Controller
         $assets->with('location')->get();
         $assets = $assets->paginate(10);
 
-        return view('admin.assets.index', compact('assets'));
+        if (Auth::user()->role == 'admin') {
+            return view('admin.assets.index', compact('assets'));
+        }else{
+            return view('pimpinan.assets.index', compact('assets'));
+        }
+        
+        
     }
 
     /**
@@ -115,10 +122,15 @@ class AssetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Asset $asset,)
+    public function show(Asset $asset)
     {
 
-        return view('admin.assets.show', compact('asset'));
+        if (Auth::user()->role == 'admin') {
+            return view('admin.assets.show', compact('asset'));
+        }else{
+            return view('admin.assets.show', compact('asset'));
+        }
+        
     }
 
     /**

@@ -4,6 +4,9 @@
 <div class="container">
     <div class="card">
         <div class="card-header d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+            <div class="text-center my-2 m-2">
+                <a href="{{ route('lokasis.create', []) }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('Tambah Data')</a>
+            </div>
             <ol class="breadcrumb m-0 p-0 flex-grow-1 mb-2 mb-md-0">
                 <li class="breadcrumb-item"><a href="{{ implode('/', ['','lokasis']) }}"> Lokasi</a></li>
             </ol>
@@ -57,9 +60,6 @@
             </table>
 
             {{ $lokasis->withQueryString()->links() }}
-        </div>
-        <div class="text-center my-2">
-            <a href="{{ route('lokasis.create', []) }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('Create new Lokasi')</a>
         </div>
     </div>
 </div>
