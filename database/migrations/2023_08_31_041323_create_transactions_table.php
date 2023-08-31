@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('report_assets', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('asset_id'); 
-            $table->date('tanggal_laporan'); 
-            $table->decimal('nilai_perolehan', 10, 2); 
-            $table->integer('umur_aset'); 
-            $table->decimal('penyusutan_per_tahun', 10, 2); 
-            $table->decimal('nilai_saat_ini', 10, 2); 
+            $table->date('tgl_transaksi'); 
+            $table->enum('jns_transaksi', ['perbaikan', 'pemeliharaan']);
+            $table->decimal('nilai_transaksi', 10, 2); 
+            $table->text('keterangan'); 
             $table->timestamps();
 
             $table->foreign('asset_id')->references('id')->on('assets');
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('report_assets');
+        Schema::dropIfExists('transactions');
     }
 };

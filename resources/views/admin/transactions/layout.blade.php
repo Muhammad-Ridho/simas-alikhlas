@@ -26,7 +26,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">{{ __('Data Lokasi') }}</h1>
+                <h1 class="m-0">{{ __('Data Transaksi Aset') }}</h1>
             </div>
         </div>
     </div>
@@ -34,7 +34,22 @@
 
 <section class="content">
     <div class="container-fluid">
-        @yield('reportAssets.content')
+        @yield('transactions.content')
     </div>
 </section>
+@endsection
+
+@section('script')
+
+<!-- view data with currency format -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const currencyElements = document.querySelectorAll('.currency');
+        currencyElements.forEach(function(element) {
+            const amount = parseFloat(element.textContent.replace(/\D/g, '')); // Mengambil angka dari teks
+            const formattedAmount = numeral(amount).format('0,0'); // Format angka dengan Numeral.js
+            element.textContent = 'Rp. ' + formattedAmount; // Tampilkan kembali ke elemen
+        });
+    });
+</script>
 @endsection

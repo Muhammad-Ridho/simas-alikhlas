@@ -59,13 +59,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('transactions.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>Asset Maintenances</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('report_assets.index')}}" class="nav-link">
+                <a href="{{route('reports.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-book"></i>
                     <p>Asset Report</p>
                 </a>

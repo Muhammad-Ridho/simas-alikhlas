@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ReportAsset extends Model {
+class Report extends Model {
     use HasFactory;
 
-    protected $table = 'report_assets';
-    protected $fillable = ["name", "asset_id", "tanggal_laporan", "nilai_perolehan", "umur_aset", "penyusutan_per_tahun", "nilai_saat_ini"];
+    protected $table = 'reports';
+    protected $fillable = ["asset_id", "tanggal_laporan", "nilai_perolehan", "umur_aset", "penyusutan_per_tahun", "nilai_saat_ini", "keterangan"];
 
     protected $casts = [
 		'tanggal_laporan' => 'datetime'

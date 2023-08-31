@@ -6,9 +6,9 @@ use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\ReportAsset;
+use App\Models\Transaction;
 
-class ReportAssetPolicy {
+class TransactionPolicy {
     use HandlesAuthorization;
 
     /**
@@ -29,7 +29,7 @@ class ReportAssetPolicy {
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, ReportAsset $reportAsset) {
+    public function view(User $user, Transaction $transaction) {
         return true;
     }
 
@@ -51,7 +51,7 @@ class ReportAssetPolicy {
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, ReportAsset $reportAsset) {
+    public function update(User $user, Transaction $transaction) {
         return true;
     }
 
@@ -62,7 +62,7 @@ class ReportAssetPolicy {
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, ReportAsset $reportAsset) {
+    public function delete(User $user, Transaction $transaction) {
         return true;
     }
 
@@ -73,7 +73,7 @@ class ReportAssetPolicy {
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, ReportAsset $reportAsset) {
+    public function restore(User $user, Transaction $transaction) {
         return true;
     }
 
@@ -84,7 +84,7 @@ class ReportAssetPolicy {
      *
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, ReportAsset $reportAsset) {
+    public function forceDelete(User $user, Transaction $transaction) {
         return true;
     }
 }
