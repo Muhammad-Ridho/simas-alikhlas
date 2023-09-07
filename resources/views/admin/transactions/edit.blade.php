@@ -32,7 +32,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="tgl_transaksi" class="form-label">Tgl Transaksi:</label>
-                        <input type="date" name="tgl_transaksi" id="tgl_transaksi" class="form-control" value="{{@old('tgl_transaksi', $transaction->tgl_transaksi)}}" required />
+                        <input type="date" name="tgl_transaksi" id="tgl_transaksi" class="form-control" value="{{@old('tgl_transaksi', $transaction->tgl_transaksi->format('Y-m-d'))}}" required />
                         @if($errors->has('tgl_transaksi'))
                         <div class='error small text-danger'>{{$errors->first('tgl_transaksi')}}</div>
                         @endif
@@ -41,7 +41,7 @@
                         <label for="jns_transaksi" class="form-label">Jns Transaksi:</label>
                         <select name="jns_transaksi" id="jns_transaksi" class="form-control form-select" required>
                             <option value="">Select Jns Transaksi</option>
-                            @foreach(["perbaikan" => "Perbaikan", "pemeliharaan" => "Pemeliharaan"] as $value => $label )
+                            @foreach(["perbaikan" => "Perbaikan", "pemeliharaan" => "Pemeliharaan", "penambahan nilai aset" => "Penambahan Nilai Aset"] as $value => $label )
                             <option value="{{ $value }}" {{ @old('jns_transaksi', $transaction->jns_transaksi) == $value ? "selected" : "" }}>{{ $label }}</option>
                             @endforeach
                         </select>

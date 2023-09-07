@@ -49,12 +49,13 @@ class KategoriController extends Controller {
      */
     public function store(Request $request, ) {
 
-        $request->validate(["name" => "required"]);
+        $request->validate(["name" => "required", "masa_manfaat" => "required"]);
 
         try {
 
             $kategori = new Kategori();
             $kategori->name = $request->name;
+            $kategori->masa_manfaat = $request->masa_manfaat;
             $kategori->save();
 
             return redirect()->route('kategoris.index', [])->with('success', __('Kategori created successfully.'));
@@ -96,10 +97,11 @@ class KategoriController extends Controller {
      */
     public function update(Request $request, Kategori $kategori,) {
 
-        $request->validate(["name" => "required"]);
+        $request->validate(["name" => "required", "masa_manfaat" => "required"]);
 
         try {
             $kategori->name = $request->name;
+            $kategori->masa_manfaat = $request->masa_manfaat;
             $kategori->save();
 
             return redirect()->route('kategoris.index', [])->with('success', __('Kategori edited successfully.'));

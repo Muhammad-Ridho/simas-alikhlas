@@ -44,16 +44,20 @@
                         <td data-label="Name">{{ $no }}</td>
                         <td data-label="Name">{{ $asset->name ?: "(blank)" }}</td>
                         <td data-label="Kategori">{{ optional($asset->category)->name ?: "N/A" }}</td>
-                        <td data-label="Tgl Perolehan">{{ $asset->tgl_perolehan ? $asset->tgl_perolehan->format('Y-m-d') : '' }}</td>
+                        <td data-label="Tgl Perolehan">{{ $asset->tgl_perolehan ? $asset->tgl_perolehan->format('d-m-Y') : '' }}</td>
                         <td data-label="Nilai Perolehan">Rp. {{ number_format($asset->nilai_perolehan, 0, ',', '.') }}</td>
                         <td data-label="Lokasi">{{ optional($asset->location)->name ?: "N/A" }}</td>
-                        <td data-label="Is Fixed Asset">{{ $asset->is_fixed_asset ? "Tetap" : "Tidak Tetap" }}</td>
+                        <td data-label="Is Fixed Asset">{{ $asset->is_fixed_asset ? "Aktif" : "Tidak Aktif" }}</td>
                         <td data-label="Asset Image Path">
                             @if($asset->asset_image_path)
+                            <!-- @foreach($asset->getMedia('images') as $image)
+                            <img src=" $image->getUrl() " alt="Asset Image">
+                            @endforeach -->
                             <img src="{{ asset('storage/asset_image_path/' . $asset->asset_image_path) }}" alt="{{ $asset->name }}" style="max-width: 100px; max-height: 100px;">
                             @else
                             <p>No Image Available</p>
                             @endif
+                            
                         </td>
 
                         <td data-label="Actions:" class="text-nowrap">

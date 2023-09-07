@@ -18,12 +18,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{url('/transactions-view')}}" class="nav-link">
-                    <i class="nav-icon fas fa-book"></i>
-                    <p>Asset Maintenances</p>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a href="{{url('/reports-view')}}" class="nav-link">
                     <i class="nav-icon fas fa-book"></i>
                     <p>Asset Reports</p>

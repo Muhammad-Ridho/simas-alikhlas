@@ -20,7 +20,7 @@
                             <select name="asset_id" id="asset_id" class="form-control form-select flex-grow-1" required>
                                 <option value="">Select Asset</option>
                                 @foreach($assets as $asset)
-                                <option value="{{ $asset->id }}" {{ @old('asset_id') == $asset->id ? "selected" : "" }} tgl-perolehan="{{ $asset->tgl_perolehan }}" data-acquisition="{{ $asset->nilai_perolehan }}">{{ $asset->name }}</option>
+                                <option value="{{ $asset->id }}" {{ @old('asset_id') == $asset->id ? "selected" : "" }} tgl-perolehan="{{ $asset->tgl_perolehan }}" data-acquisition="{{ $asset->nilai_perolehan }}" masa-manfaat="{{ $asset->category->masa_manfaat }}">{{ $asset->name }}</option>
                                 @endforeach
                             </select>
 
@@ -32,37 +32,44 @@
                     </div>
                     <div class="mb-3">
                         <label for="tanggal_laporan" class="form-label">Tanggal Laporan:</label>
-                        <input type="date" name="tanggal_laporan" id="tanggal_laporan" class="form-control" value="{{@old('tanggal_laporan')}}" required readonly/>
+                        <input type="date" name="tanggal_laporan" id="tanggal_laporan" class="form-control" value="{{@old('tanggal_laporan')}}" required readonly />
                         @if($errors->has('tanggal_laporan'))
                         <div class='error small text-danger'>{{$errors->first('tanggal_laporan')}}</div>
                         @endif
                     </div>
                     <div class="mb-3">
                         <label for="nilai_perolehan" class="form-label">Nilai Perolehan:</label>
-                        <input type="number" name="nilai_perolehan" id="nilai_perolehan" class="form-control" value="{{@old('nilai_perolehan')}}" required readonly/>
+                        <input type="number" name="nilai_perolehan" id="nilai_perolehan" class="form-control" value="{{@old('nilai_perolehan')}}" required readonly />
                         @if($errors->has('nilai_perolehan'))
                         <div class='error small text-danger'>{{$errors->first('nilai_perolehan')}}</div>
                         @endif
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="umur_aset" class="form-label">Umur Aset:</label>
-                        <input type="number" name="umur_aset" id="umur_aset" class="form-control" value="{{@old('umur_aset')}}" required/>
+                        <input type="number" name="umur_aset" id="umur_aset" class="form-control" value="{{@old('umur_aset')}}" required />
                         @if($errors->has('umur_aset'))
                         <div class='error small text-danger'>{{$errors->first('umur_aset')}}</div>
                         @endif
 
                         <p id="ket_umur_aset">keterangan Umur Aset</p>
+                    </div> -->
+                    <div class="mb-3">
+                        <label for="penyusutan_per_bulan" class="form-label">Penyusutan Per Bulan:</label>
+                        <input type="number" name="penyusutan_per_bulan" id="penyusutan_per_bulan" class="form-control" value="{{@old('penyusutan_per_bulan')}}" required readonly />
+                        @if($errors->has('penyusutan_per_bulan'))
+                        <div class='error small text-danger'>{{$errors->first('penyusutan_per_bulan')}}</div>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="penyusutan_per_tahun" class="form-label">Penyusutan Per Tahun:</label>
-                        <input type="number" name="penyusutan_per_tahun" id="penyusutan_per_tahun" class="form-control" value="{{@old('penyusutan_per_tahun')}}" required readonly/>
+                        <input type="number" name="penyusutan_per_tahun" id="penyusutan_per_tahun" class="form-control" value="{{@old('penyusutan_per_tahun')}}" required readonly />
                         @if($errors->has('penyusutan_per_tahun'))
                         <div class='error small text-danger'>{{$errors->first('penyusutan_per_tahun')}}</div>
                         @endif
                     </div>
                     <div class="mb-3">
                         <label for="nilai_saat_ini" class="form-label">Nilai Saat Ini:</label>
-                        <input type="number" name="nilai_saat_ini" id="nilai_saat_ini" class="form-control" value="{{@old('nilai_saat_ini')}}" required readonly/>
+                        <input type="number" name="nilai_saat_ini" id="nilai_saat_ini" class="form-control" value="{{@old('nilai_saat_ini')}}" required readonly />
                         @if($errors->has('nilai_saat_ini'))
                         <div class='error small text-danger'>{{$errors->first('nilai_saat_ini')}}</div>
                         @endif
@@ -93,15 +100,13 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const assetDropdown = document.getElementById("asset_id");
-        const umurAsetInput = document.getElementById("umur_aset");
+        // const umurAsetInput = document.getElementById("umur_aset");
         const reportDateInput = document.getElementById("tanggal_laporan");
-        const ketUmurAsetElement = document.getElementById("ket_umur_aset");
+        // const ketUmurAsetElement = document.getElementById("ket_umur_aset");
         const acquisitionInput = document.getElementById("nilai_perolehan");
         const nilaiSaatIniInput = document.getElementById("nilai_saat_ini");
+        const penyusutanPerBulanInput = document.getElementById("penyusutan_per_bulan");
         const penyusutanPertahunInput = document.getElementById("penyusutan_per_tahun");
-
-        // Constants for calculation
-        const lifespanInYears = 5; // Lifespan of the asset in years
 
         assetDropdown.addEventListener("change", function() {
             // Get the selected option
@@ -121,24 +126,31 @@
 
             // Set integer value for age in years on the umur aset input
             const umurAset = Math.floor(ageInYears);
-            umurAsetInput.value = umurAset;
+            // umurAsetInput.value = umurAset;
             // Set values to the Report Date input
             reportDateInput.value = acquisitionDate.toISOString().slice(0, 10); // Format date as yyyy-mm-dd
 
             // sett text p id ="ket_umur_aset"
-            const years = ageInYears.toFixed(2);
-            const months = Math.floor(years * 12);
-            const days = Math.floor(years * 365);
+            // const years = ageInYears.toFixed(2);
+            // const months = Math.floor(years * 12);
+            // const days = Math.floor(years * 365);
 
-            ketUmurAsetElement.textContent = `Umur aset: ${years} tahun setara dengan ${months} bulan atau ${days} hari.`;
+            // ketUmurAsetElement.textContent = `Umur aset: ${years} tahun setara dengan ${months} bulan atau ${days} hari.`;
 
             // ============menghitung penyusutan pertahun============
+            // Constants for calculation
+            const lifespanInYears = selectedOption.getAttribute("masa-manfaat"); // Lifespan of the asset in years
+            console.log(lifespanInYears)
             // Calculate depreciation per year using straight-line method
             const depreciationPertahun = (selectedOption.getAttribute("data-acquisition") - 0) / lifespanInYears;
             penyusutanPertahunInput.value = depreciationPertahun.toFixed(2); // Round to 2 decimal places
 
+            // ============menghitung penyusutan bulan============
+            // const penyusutanPertahun = selectedOption.getAttribute("data-acquisition");
+            penyusutanPerBulanInput.value = depreciationPertahun / 12; // Round to 2 decimal places
+
             // ============mendapatkan nilai saat ini============
-            const currentYearDepreciation = umurAset * depreciationPertahun;
+            const currentYearDepreciation = umurAset * depreciationPertahun / 12;
             let currentValue = selectedOption.getAttribute("data-acquisition") - currentYearDepreciation;
             // If current value is negative, set it to 1
             if (currentValue < 0) {

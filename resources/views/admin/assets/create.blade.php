@@ -102,11 +102,11 @@
                         <div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="is_fixed_asset" id="is_fixed_asset_yes" value="1" {{ @old('is_fixed_asset') == '1' ? 'checked' : '' }} required>
-                                <label class="form-check-label" for="inlineRadio1">Tetap</label>
+                                <label class="form-check-label" for="inlineRadio1">Aktif</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="is_fixed_asset" id="is_fixed_asset_no" value="0" {{ @old('is_fixed_asset') == '0' ? 'checked' : '' }} required>
-                                <label class="form-check-label" for="inlineRadio2">Tidak Tetap</label>
+                                <label class="form-check-label" for="inlineRadio2">Tidak Aktif</label>
                             </div>
                         </div>
                         @if($errors->has('is_fixed_asset'))

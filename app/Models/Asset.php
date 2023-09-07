@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
@@ -10,8 +12,9 @@ use App\Models\Jnspengadaan;
 use App\Models\Lokasi;
 use App\Models\Department;
 
-class Asset extends Model
+class Asset extends Model implements HasMedia
 {
+  use InteractsWithMedia;
   use HasFactory;
 
   protected $table = 'assets';

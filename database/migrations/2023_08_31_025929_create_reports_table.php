@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('tanggal_laporan'); 
             $table->decimal('nilai_perolehan', 10, 2); 
             $table->integer('umur_aset'); 
+            $table->decimal('penyusutan_per_bulan', 10, 2); 
             $table->decimal('penyusutan_per_tahun', 10, 2); 
             $table->decimal('nilai_saat_ini', 10, 2); 
             $table->text('keterangan'); 

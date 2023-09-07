@@ -110,11 +110,11 @@
                         <div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="is_fixed_asset" id="is_fixed_asset_yes" value="1" {{ @old('is_fixed_asset', $asset->is_fixed_asset) == '1' ? 'checked' : '' }} required>
-                                <label class="form-check-label" for="inlineRadio1">Tetap</label>
+                                <label class="form-check-label" for="inlineRadio1">Aktif</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="is_fixed_asset" id="is_fixed_asset_no" value="0" {{ @old('is_fixed_asset', $asset->is_fixed_asset) == '0' ? 'checked' : '' }} required>
-                                <label class="form-check-label" for="inlineRadio2">Tidak Tetap</label>
+                                <label class="form-check-label" for="inlineRadio2">Tidak Aktif</label>
                             </div>
                         </div>
                         @if($errors->has('is_fixed_asset'))
@@ -123,7 +123,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="asset_image_path" class="form-label">Asset Image Path:</label>
-                        <input type="file" name="asset_image_path" id="asset_image_path" class="form-control" value="{{@old('asset_image_path', $asset->asset_image_path)}}"/>
+                        <input type="file" name="asset_image_path" id="asset_image_path" class="form-control" accept="image/*"/>
                         @if($errors->has('asset_image_path'))
                         <div class='error small text-danger'>{{$errors->first('asset_image_path')}}</div>
                         @endif

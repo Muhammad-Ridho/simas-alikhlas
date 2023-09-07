@@ -21,6 +21,13 @@
                         <div class='error small text-danger'>{{$errors->first('name')}}</div>
                         @endif
                     </div>
+                    <div class="mb-3">
+                        <label for="masa_manfaat" class="form-label">Masa Manfaat:</label>
+                        <input type="text" name="masa_manfaat" id="masa_manfaat" class="form-control" value="{{@old('masa_manfaat', $kategori->masa_manfaat)}}" required />
+                        @if($errors->has('masa_manfaat'))
+                        <div class='error small text-danger'>{{$errors->first('masa_manfaat')}}</div>
+                        @endif
+                    </div>
 
                 </div>
                 <div class="card-footer">

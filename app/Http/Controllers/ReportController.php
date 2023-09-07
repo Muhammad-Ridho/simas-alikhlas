@@ -64,7 +64,15 @@ class ReportController extends Controller
     public function store(Request $request,)
     {
 
-        $request->validate(["asset_id" => "required", "tanggal_laporan" => "required", "nilai_perolehan" => "required", "umur_aset" => "required", "penyusutan_per_tahun" => "required", "nilai_saat_ini" => "required", "keterangan" => "required"]);
+        $request->validate([
+            "asset_id" => "required", 
+            "tanggal_laporan" => "required", 
+            "nilai_perolehan" => "required", 
+            // "umur_aset" => "required", 
+            "penyusutan_per_bulan" => "required", 
+            "penyusutan_per_tahun" => "required", 
+            "nilai_saat_ini" => "required", 
+            "keterangan" => "required"]);
 
         try {
 
@@ -73,6 +81,7 @@ class ReportController extends Controller
             $report->tanggal_laporan = $request->tanggal_laporan;
             $report->nilai_perolehan = $request->nilai_perolehan;
             $report->umur_aset = $request->umur_aset;
+            $report->penyusutan_per_bulan = $request->penyusutan_per_bulan;
             $report->penyusutan_per_tahun = $request->penyusutan_per_tahun;
             $report->nilai_saat_ini = $request->nilai_saat_ini;
             $report->keterangan = $request->keterangan;
@@ -122,13 +131,22 @@ class ReportController extends Controller
     public function update(Request $request, Report $report,)
     {
 
-        $request->validate(["asset_id" => "required", "tanggal_laporan" => "required", "nilai_perolehan" => "required", "umur_aset" => "required", "penyusutan_per_tahun" => "required", "nilai_saat_ini" => "required", "keterangan" => "required"]);
+        $request->validate([
+            "asset_id" => "required", 
+            "tanggal_laporan" => "required", 
+            "nilai_perolehan" => "required", 
+            // "umur_aset" => "required", 
+            "penyusutan_per_bulan" => "required", 
+            "penyusutan_per_tahun" => "required", 
+            "nilai_saat_ini" => "required", 
+            "keterangan" => "required"]);
 
         try {
             $report->asset_id = $request->asset_id;
             $report->tanggal_laporan = $request->tanggal_laporan;
             $report->nilai_perolehan = $request->nilai_perolehan;
             $report->umur_aset = $request->umur_aset;
+            $report->penyusutan_per_bulan = $request->penyusutan_per_bulan;
             $report->penyusutan_per_tahun = $request->penyusutan_per_tahun;
             $report->nilai_saat_ini = $request->nilai_saat_ini;
             $report->keterangan = $request->keterangan;

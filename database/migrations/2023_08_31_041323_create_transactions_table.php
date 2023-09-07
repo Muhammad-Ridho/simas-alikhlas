@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('asset_id'); 
             $table->date('tgl_transaksi'); 
-            $table->enum('jns_transaksi', ['perbaikan', 'pemeliharaan']);
+            $table->enum('jns_transaksi', ['perbaikan', 'pemeliharaan', 'penambahan nilai aset']);
             $table->decimal('nilai_transaksi', 10, 2); 
             $table->text('keterangan'); 
             $table->timestamps();

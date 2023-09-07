@@ -26,6 +26,7 @@
                     <tr role="row">
                         <th role='columnheader'>No</th>
                         <th role='columnheader'>Name</th>
+                        <th role='columnheader'>Masa Manfaat</th>
                         <th scope="col" data-label="Actions">Actions</th>
                     </tr>
                 </thead>
@@ -36,6 +37,7 @@
                     <tr>
                         <td data-label="Name">{{ $no }}</td>
                         <td data-label="Name">{{ $kategori->name ?: "(blank)" }}</td>
+                        <td data-label="Masa Manfaat">{{ $kategori->masa_manfaat ?: "(blank)" }} Tahun</td>
 
                         <td data-label="Actions:" class="text-nowrap">
                             <a href="{{route('kategoris.show', compact('kategori'))}}" type="button" class="btn btn-primary btn-sm me-1">@lang('Show')</a>

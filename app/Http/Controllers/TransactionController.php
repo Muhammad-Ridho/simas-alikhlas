@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asset;
 use Illuminate\Http\Request;
 
 use App\Models\Transaction;
@@ -33,10 +34,10 @@ class TransactionController extends Controller
 
         $transactions = $transactions->paginate(10);
 
-        
+
         if (Auth::user()->role == 'admin') {
             return view('admin.transactions.index', compact('transactions'));
-        }else{
+        } else {
             return view('pimpinan.transactions.index', compact('transactions'));
         }
     }
@@ -66,6 +67,7 @@ class TransactionController extends Controller
 
         $request->validate(["asset_id" => "required", "tgl_transaksi" => "required", "jns_transaksi" => "required", "nilai_transaksi" => "required", "keterangan" => "required"]);
 
+       
         try {
 
             $transaction = new Transaction();
@@ -75,6 +77,15 @@ class TransactionController extends Controller
             $transaction->nilai_transaksi = $request->nilai_transaksi;
             $transaction->keterangan = $request->keterangan;
             $transaction->save();
+
+            if ($request->jns_transaksi == 'penambahan nilai aset') {
+                // Ambil aset yang terkait dengan transaksi
+                $asset = Asset::find($request->asset_id);
+    
+                // Update nilai perolehan pada aset
+                $asset->nilai_perolehan = $asset->nilai_perolehan += $request->nilai_transaksi;
+                $asset->save();
+            }
 
             return redirect()->route('transactions.index', [])->with('success', __('Transaction created successfully.'));
         } catch (\Throwable $e) {

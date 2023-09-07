@@ -10,7 +10,7 @@ class Report extends Model {
     use HasFactory;
 
     protected $table = 'reports';
-    protected $fillable = ["asset_id", "tanggal_laporan", "nilai_perolehan", "umur_aset", "penyusutan_per_tahun", "nilai_saat_ini", "keterangan"];
+    protected $fillable = ["asset_id", "tanggal_laporan", "nilai_perolehan", "umur_aset", "penyusutan_per_bulan", "penyusutan_per_tahun", "nilai_saat_ini", "keterangan"];
 
     protected $casts = [
 		'tanggal_laporan' => 'datetime'

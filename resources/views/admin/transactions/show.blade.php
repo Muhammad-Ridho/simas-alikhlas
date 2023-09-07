@@ -39,14 +39,6 @@
                         <th scope="row">Keterangan:</th>
                         <td>{{ Str::limit($transaction->keterangan, 50) ?: "(blank)"}}</td>
                     </tr>
-                    <tr>
-                        <th scope="row">Created at</th>
-                        <td>{{Carbon\Carbon::parse($transaction->created_at)->format('d/m/Y H:i:s')}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Updated at</th>
-                        <td>{{Carbon\Carbon::parse($transaction->updated_at)->format('d/m/Y H:i:s')}}</td>
-                    </tr>
                 </tbody>
             </table>
 

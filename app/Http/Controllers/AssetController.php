@@ -102,8 +102,8 @@ class AssetController extends Controller
         // $asset->asset_image_path = $imagePath;
 
         if ($request->hasFile('asset_image_path')) {
-            $imagePath = $request->file('asset_image_path')->store('asset_image_path', 'public'); // Upload and store image
-            $asset->asset_image_path = $imagePath;
+            $imagePath = $request->file('asset_image_path')->store('assets', 'public');
+            $asset->addMedia(storage_path('app/public/' . $imagePath))->toMediaCollection('images');
         }
 
         try {
@@ -186,9 +186,10 @@ class AssetController extends Controller
             $asset->is_fixed_asset = !!$request->is_fixed_asset;
 
             if ($request->hasFile('asset_image_path')) {
-                $imagePath = $request->file('asset_image_path')->store('asset_image_path', 'public'); // Upload and store image
-                $asset->asset_image_path = $imagePath;
+                $imagePath = $request->file('asset_image_path')->store('assets', 'public');
+                $asset->addMedia(storage_path('app/public/' . $imagePath))->toMediaCollection('images');
             }
+            
             // $asset->asset_image_path = $request->asset_image_path;
             $asset->save();
 
